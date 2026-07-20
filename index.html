@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT Asa Cipta Konektivita — Menghubungkan Bisnis Anda dengan Teknologi Masa Depan</title>
+<meta name="description" content="Solusi perangkat lunak kustom, SaaS, dashboard, dan otomatisasi bisnis kelas enterprise — mudah digunakan, cepat diimplementasikan, dan ramah anggaran.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A1F3D;
+    --navy:#123566;
+    --primary:#1C5FD1;
+    --accent:#2FB2E8;
+    --surface:#F4F7FB;
+    --paper:#FFFFFF;
+    --slate:#3E4A5E;
+    --slate-2:#71809A;
+    --line:#E2E8F1;
+    --grad: linear-gradient(120deg, var(--ink) 0%, var(--primary) 58%, var(--accent) 100%);
+    --font-display:'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-body:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --maxw:1160px;
+    --radius:16px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important} }
+  body{
+    font-family:var(--font-body);
+    color:var(--slate);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{position:relative}
+  h1,h2,h3,h4{font-family:var(--font-display);color:var(--ink);letter-spacing:-0.01em;line-height:1.12}
+  h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:700}
+  h3{font-size:1.2rem;font-weight:600}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--primary);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(47,178,232,0.18)}
+  .eyebrow--light{color:#BEE0FF}
+  .eyebrow--light::before{background:#9FE0FF;box-shadow:0 0 0 3px rgba(159,224,255,0.22)}
+
+  .section-head{max-width:640px;margin-bottom:44px}
+  .section-head p{color:var(--slate-2);font-size:1.02rem;margin-top:14px}
+  .section-head--center{margin-left:auto;margin-right:auto;text-align:center}
+
+  .btn{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:0.95rem;
+    padding:14px 26px;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+    white-space:nowrap;
+  }
+  .btn svg{width:18px;height:18px;flex-shrink:0}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 20px -8px rgba(28,95,209,0.55)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(28,95,209,0.6)}
+  .btn-ghost{background:transparent;border-color:rgba(10,31,61,0.16);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
+  .btn-on-dark{background:#fff;color:var(--ink);box-shadow:0 8px 22px -8px rgba(0,0,0,0.4)}
+  .btn-on-dark:hover{transform:translateY(-2px)}
+  .btn-ghost-on-dark{background:transparent;border-color:rgba(255,255,255,0.3);color:#fff}
+  .btn-ghost-on-dark:hover{border-color:#fff;transform:translateY(-2px)}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 0;
+    transition:padding .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{padding:12px 0;background:rgba(255,255,255,0.86);backdrop-filter:blur(14px);border-color:var(--line);box-shadow:0 6px 24px -18px rgba(10,31,61,0.35)}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+  .brand img{height:36px;width:auto}
+  .brand span{display:none}
+  .nav-links{display:none;align-items:center;gap:34px}
+  .nav-links a{font-size:0.92rem;font-weight:500;color:var(--ink);position:relative;padding:4px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--accent);transition:width .2s ease}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{display:none}
+  .nav-toggle{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:#fff}
+  .nav-toggle svg{width:20px;height:20px;color:var(--ink)}
+  .mobile-menu{position:fixed;inset:0;background:var(--ink);z-index:99;display:flex;flex-direction:column;padding:100px 28px 40px;gap:26px;transform:translateY(-100%);transition:transform .35s ease;visibility:hidden}
+  .mobile-menu.open{transform:translateY(0);visibility:visible}
+  .mobile-menu a{font-family:var(--font-display);font-size:1.6rem;color:#fff;font-weight:600}
+  .mobile-menu .btn{margin-top:12px;align-self:flex-start}
+  .mobile-close{position:absolute;top:22px;right:24px;width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
+  .mobile-close svg{width:20px;height:20px;color:#fff}
+
+  @media (min-width:960px){
+    .brand span{display:inline}
+    .nav-links{display:flex}
+    .nav-cta{display:inline-flex}
+    .nav-toggle{display:none}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:150px 0 90px;
+    background:
+      radial-gradient(900px 480px at 82% -8%, rgba(47,178,232,0.14), transparent 60%),
+      radial-gradient(700px 420px at -6% 30%, rgba(28,95,209,0.08), transparent 60%),
+      var(--paper);
+    overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center}
+  .hero-copy h1{font-size:clamp(2.2rem,5.6vw,3.5rem);margin-bottom:20px}
+  .hero-copy .accent-word{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-copy p{font-size:1.08rem;color:var(--slate);max-width:560px;margin-bottom:32px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
+  .hero-trust{display:flex;flex-wrap:wrap;gap:26px;font-size:0.86rem;color:var(--slate-2)}
+  .hero-trust li{display:flex;align-items:center;gap:8px}
+  .hero-trust svg{width:16px;height:16px;color:var(--primary);flex-shrink:0}
+
+  .mockup-wrap{position:relative;display:flex;justify-content:center}
+  .mockup-svg{width:100%;max-width:560px;height:auto}
+  .node-pulse{animation:pulse 2.6s ease-in-out infinite}
+  .node-pulse.delay{animation-delay:1.1s}
+  @keyframes pulse{0%,100%{opacity:1;r:6}50%{opacity:.55;r:8}}
+  .flow-dash{stroke-dasharray:6 8;animation:dashmove 6s linear infinite}
+  @keyframes dashmove{to{stroke-dashoffset:-140}}
+  .float-chip{position:absolute;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--ink);box-shadow:0 14px 30px -14px rgba(10,31,61,0.35);display:flex;align-items:center;gap:8px;animation:floaty 5s ease-in-out infinite}
+  .float-chip svg{width:14px;height:14px;color:var(--accent)}
+  .float-chip.c1{top:6%;left:0}
+  .float-chip.c2{bottom:10%;right:2%;animation-delay:1.6s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  @media (min-width:960px){
+    .hero-grid{grid-template-columns:1.05fr 0.95fr;gap:40px}
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{padding:96px 0}
+  .about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:start}
+  .about-copy p{margin-bottom:16px;font-size:1.03rem}
+  .about-copy p:last-child{margin-bottom:0}
+  .about-rail{display:flex;flex-direction:column;gap:18px}
+  .rail-card{border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:var(--surface)}
+  .rail-card b{display:block;font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:4px}
+  .rail-card span{font-size:0.85rem;color:var(--slate-2)}
+  @media (min-width:900px){
+    .about-grid{grid-template-columns:1.3fr 0.8fr}
+  }
+
+  /* ---------- VISION (dark band) ---------- */
+  .vision{
+    background:var(--grad);
+    padding:96px 0;
+    color:#fff;
+    position:relative;
+  }
+  .vision::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
+    background-size:26px 26px;
+    opacity:.35;
+    mask-image:linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+  }
+  .vision-inner{position:relative;max-width:780px}
+  .vision h2{color:#fff;font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:20px}
+  .vision p{color:rgba(255,255,255,0.86);font-size:1.1rem}
+
+  /* ---------- PROBLEM + APPROACH ---------- */
+  .problems{padding:96px 0}
+  .problem-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:14px}
+  .problem-card{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:#fff}
+  .problem-card .icon-wrap{width:44px;height:44px;border-radius:12px;background:#FBECEC;color:#C6483F;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .problem-card .icon-wrap svg{width:22px;height:22px}
+  .problem-card h3{font-size:1.02rem;margin-bottom:8px}
+  .problem-card p{font-size:0.92rem;color:var(--slate-2)}
+  .approach-bridge{display:flex;align-items:center;justify-content:center;gap:14px;margin:34px 0;color:var(--primary)}
+  .approach-bridge svg{width:26px;height:26px;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  .approach-bridge span{font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase}
+  .approach-card{background:var(--ink);border-radius:20px;padding:36px;color:#fff;display:flex;flex-direction:column;gap:8px}
+  .approach-card .icon-wrap{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);color:#9FE0FF;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .approach-card .icon-wrap svg{width:22px;height:22px}
+  .approach-card h3{color:#fff;font-size:1.25rem}
+  .approach-card p{color:rgba(255,255,255,0.82);max-width:640px}
+  @media (min-width:700px){ .problem-grid{grid-template-columns:1fr 1fr} }
+  @media (min-width:1020px){ .problem-grid{grid-template-columns:repeat(4,1fr)} }
+
+  /* ---------- SOLUTIONS / PRODUCTS grid cards ---------- */
+  .solutions{padding:96px 0;background:var(--surface)}
+  .card-grid{display:grid;grid-template-columns:1fr;gap:18px}
+  .solution-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+  .solution-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(10,31,61,0.28);border-color:rgba(28,95,209,0.25)}
+  .solution-card .icon-wrap{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg, rgba(28,95,209,0.12), rgba(47,178,232,0.16));color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .solution-card .icon-wrap svg{width:23px;height:23px}
+  .solution-card h3{margin-bottom:8px}
+  .solution-card p{font-size:0.92rem;color:var(--slate-2)}
+  @media (min-width:700px){ .card-grid{grid-template-columns:1fr 1fr} }
+  @media (min-width:1020px){ .card-grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+
+  /* ---------- PRODUCTS ---------- */
+  .products{padding:96px 0}
+  .product-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .product-card{border:1px solid var(--line);border-radius:var(--radius);padding:26px;position:relative;overflow:hidden;background:#fff}
+  .product-card::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle, rgba(47,178,232,0.16), transparent 70%)}
+  .product-tag{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--primary);background:rgba(28,95,209,0.08);padding:5px 10px;border-radius:999px;display:inline-block;margin-bottom:16px}
+  .product-card h3{margin-bottom:8px;position:relative;z-index:1}
+  .product-card p{font-size:0.92rem;color:var(--slate-2);position:relative;z-index:1}
+  @media (min-width:640px){ .product-grid{grid-template-columns:1fr 1fr} }
+  @media (min-width:1020px){ .product-grid{grid-template-columns:repeat(4,1fr)} }
+
+  /* ---------- PROCESS ---------- */
+  .process{padding:96px 0;background:var(--surface)}
+  .process-path{position:relative}
+  .process-path::before{
+    content:"";position:absolute;left:23px;top:6px;bottom:6px;width:2px;
+    background:repeating-linear-gradient(to bottom, var(--primary) 0 6px, transparent 6px 12px);
+  }
+  @media (min-width:920px){
+    .process-path::before{left:0;right:0;top:23px;bottom:auto;height:2px;width:auto;background:repeating-linear-gradient(to right, var(--primary) 0 6px, transparent 6px 12px)}
+  }
+  .process-steps{display:flex;flex-direction:column;gap:0;position:relative}
+  .process-step{display:flex;gap:22px;padding:26px 0}
+  .process-step .node{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:600;font-size:0.95rem;position:relative;z-index:1}
+  .process-step h3{margin-bottom:6px}
+  .process-step p{font-size:0.92rem;color:var(--slate-2);max-width:440px}
+  @media (min-width:920px){
+    .process-steps{flex-direction:row;justify-content:space-between;gap:10px}
+    .process-step{flex-direction:column;text-align:left;padding:0;width:16%}
+    .process-step .node{margin-bottom:18px}
+  }
+
+  /* ---------- TECH STACK ---------- */
+  .stack{padding:96px 0}
+  .stack-groups{display:grid;grid-template-columns:1fr;gap:28px}
+  .stack-group h4{font-family:var(--font-mono);font-size:0.76rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--slate-2);margin-bottom:14px;font-weight:600}
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{font-family:var(--font-mono);font-size:0.82rem;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+  @media (min-width:900px){ .stack-groups{grid-template-columns:repeat(3,1fr)} }
+
+  /* ---------- PILLARS ---------- */
+  .pillars{padding:96px 0;background:var(--surface)}
+
+  /* ---------- VALUE PROP ---------- */
+  .value{padding:96px 0}
+  .value-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .value-item{display:grid;grid-template-columns:1fr;gap:10px;padding:30px 0;border-bottom:1px solid var(--line)}
+  .value-item .vnum{font-family:var(--font-mono);color:var(--primary);font-size:0.85rem;font-weight:600}
+  .value-item h3{font-size:1.15rem}
+  .value-item p{color:var(--slate-2);font-size:0.95rem;max-width:560px}
+  @media (min-width:820px){
+    .value-item{grid-template-columns:70px 1fr 1.4fr;align-items:start;gap:24px}
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq{padding:96px 0;background:var(--surface)}
+  .faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:1rem}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item .plus{width:26px;height:26px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+  .faq-item .plus::before,.faq-item .plus::after{content:"";position:absolute;background:var(--primary);border-radius:2px}
+  .faq-item .plus::before{width:11px;height:2px}
+  .faq-item .plus::after{width:2px;height:11px;transition:transform .2s ease}
+  .faq-item[open] .plus::after{transform:rotate(90deg)}
+  .faq-item .faq-a{padding:0 24px 22px;color:var(--slate-2);font-size:0.95rem;max-width:680px}
+
+  /* ---------- CTA ---------- */
+  .cta{background:var(--ink);padding:100px 0;text-align:center;position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 340px at 50% 0%, rgba(47,178,232,0.22), transparent 70%)}
+  .cta-inner{position:relative;max-width:680px;margin:0 auto}
+  .cta h2{color:#fff;font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:16px}
+  .cta p{color:rgba(255,255,255,0.78);font-size:1.05rem;margin-bottom:36px}
+  .cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#081428;color:rgba(255,255,255,0.72);padding:72px 0 30px}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .footer-brand img{height:34px}
+  .footer-brand span{font-family:var(--font-display);font-weight:700;color:#fff;font-size:1rem}
+  .footer-col p{font-size:0.9rem;max-width:280px}
+  .footer-col h4{color:#fff;font-family:var(--font-mono);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px}
+  .footer-col ul{display:flex;flex-direction:column;gap:10px;font-size:0.92rem}
+  .footer-col a:hover{color:#fff}
+  .footer-col li{display:flex;align-items:flex-start;gap:9px}
+  .footer-col li svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;color:var(--accent)}
+  .footer-bottom{padding-top:26px;display:flex;flex-direction:column;gap:14px;font-size:0.82rem;align-items:flex-start}
+  @media (min-width:700px){ .footer-grid{grid-template-columns:1.2fr 1fr 1fr} }
+  @media (min-width:700px){ .footer-bottom{flex-direction:row;justify-content:space-between;align-items:center} }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="ic-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.9a8.4 8.4 0 1 1-3.8-7"/><path d="M20.5 3.5 17 7"/><path d="M8.5 9.5c0 3.5 3 6.5 6.5 6.5l1-2-2.7-1.3-.8 1c-1.4-.8-2.2-1.6-3-3l1-.8L9.2 6.5z"/></symbol>
+    <symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="ic-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3.2v5c0 4.8-3 8.3-7 9.8-4-1.5-7-5-7-9.8v-5L12 3z"/></symbol>
+    <symbol id="ic-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></symbol>
+    <!-- problem icons -->
+    <symbol id="ic-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="7" rx="7" ry="3.2"/><path d="M5 7v10c0 1.8 3.1 3.2 7 3.2s7-1.4 7-3.2V7"/><path d="M5 12c0 1.8 3.1 3.2 7 3.2s7-1.4 7-3.2"/></symbol>
+    <symbol id="ic-maze" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M7 8h6v4H9v4h8M14 8v0"/></symbol>
+    <symbol id="ic-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12M7 3c0 5 5 6.5 5 9s-5 4-5 9M17 3c0 5-5 6.5-5 9s5 4 5 9"/></symbol>
+    <symbol id="ic-broken-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5 5.8 18a3 3 0 0 1-4.2-4.2l3.5-3.5"/><path d="M14.5 9.5 18 5.8a3 3 0 1 1 4.2 4.2l-3.5 3.5"/><path d="M9 15l1.5-1.5M13 9l1.5-1.5" opacity=".4"/></symbol>
+    <!-- solution icons -->
+    <symbol id="ic-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 19h2"/></symbol>
+    <symbol id="ic-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="M3 13l9 5 9-5M3 18l9 5 9-5" opacity=".55"/></symbol>
+    <symbol id="ic-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M8 15V9M12 15v-3M16 15V7"/></symbol>
+    <symbol id="ic-automation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6"/><path d="M18.5 3v4.5H14M5.5 21v-4.5H10"/></symbol>
+    <symbol id="ic-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8 4.5 12 9 16M15 8l4.5 4-4.5 4"/></symbol>
+    <symbol id="ic-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.7 1.3A3.8 3.8 0 0 0 7 18z"/></symbol>
+    <!-- pillars -->
+    <symbol id="ic-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
+    <symbol id="ic-devices" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="13" height="9" rx="1.5"/><rect x="15" y="9" width="6.5" height="11" rx="1.5"/><path d="M2.5 16.5h9"/></symbol>
+    <symbol id="ic-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+    <symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12.5 12 21l-9-9V3h9l8.5 8.5z"/><circle cx="7.5" cy="7.5" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5S3.5 15 3.5 8.8A4.8 4.8 0 0 1 12 5.8a4.8 4.8 0 0 1 8.5 3c0 6.2-8.5 11.7-8.5 11.7z"/></symbol>
+    <!-- footer -->
+    <symbol id="ic-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="ic-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></symbol>
+  </defs>
+</svg>
+
+<header id="siteHeader">
+  <div class="container nav-row">
+    <a href="#home" class="brand"><img src="logo.png" alt="Logo PT Asa Cipta Konektivita"><span>Asa Cipta Konektivita</span></a>
+    <nav class="nav-links">
+      <a href="#about">Tentang</a>
+      <a href="#solutions">Solusi</a>
+      <a href="#products">Produk</a>
+      <a href="#process">Proses</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="https://wa.me/6287810101060?text=Halo%20PT%20Asa%20Cipta%20Konektivita%2C%20saya%20ingin%20konsultasi%20gratis%20terkait%20kebutuhan%20software%20untuk%20bisnis%20saya." target="_blank" rel="noopener">Konsultasi Gratis</a>
+    <button class="nav-toggle" id="menuOpen" aria-label="Buka menu"><svg><use href="#ic-menu"/></svg></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="menuClose" aria-label="Tutup menu"><svg><use href="#ic-close"/></svg></button>
+  <a href="#about">Tentang</a>
+  <a href="#solutions">Solusi</a>
+  <a href="#products">Produk</a>
+  <a href="#process">Proses</a>
+  <a href="#faq">FAQ</a>
+  <a class="btn btn-primary" href="https://wa.me/6287810101060?text=Halo%20PT%20Asa%20Cipta%20Konektivita%2C%20saya%20ingin%20konsultasi%20gratis%20terkait%20kebutuhan%20software%20untuk%20bisnis%20saya." target="_blank" rel="noopener"><svg><use href="#ic-whatsapp"/></svg>Konsultasi Gratis</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Software · SaaS · Otomatisasi Bisnis</p>
+        <h1>Menghubungkan bisnis Anda dengan <span class="accent-word">teknologi masa depan</span>.</h1>
+        <p>Kami menghadirkan solusi perangkat lunak kustom, SaaS, dan otomatisasi bisnis tingkat enterprise yang mudah digunakan, cepat diimplementasikan, dan ramah anggaran untuk pertumbuhan bisnis Anda.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://wa.me/6287810101060?text=Halo%20PT%20Asa%20Cipta%20Konektivita%2C%20saya%20ingin%20konsultasi%20gratis%20terkait%20kebutuhan%20software%20untuk%20bisnis%20saya." target="_blank" rel="noopener"><svg><use href="#ic-whatsapp"/></svg>Konsultasi Gratis Sekarang</a>
+          <a class="btn btn-ghost" href="https://calendar.app.google/eT4N8xKJkbgGPsGX6" target="_blank" rel="noopener"><svg><use href="#ic-calendar"/></svg>Mulai Diskusi Proyek</a>
+        </div>
+        <ul class="hero-trust">
+          <li><svg><use href="#ic-check"/></svg>Cross-platform: Android, iOS &amp; Web</li>
+          <li><svg><use href="#ic-check"/></svg>Arsitektur cloud-native &amp; aman</li>
+          <li><svg><use href="#ic-check"/></svg>Biaya transparan, tanpa kejutan</li>
+        </ul>
+      </div>
+
+      <div class="mockup-wrap">
+        <div class="float-chip c1"><svg><use href="#ic-bolt"/></svg>Realtime Sync</div>
+        <div class="float-chip c2"><svg><use href="#ic-shield"/></svg>Cloud Secure</div>
+        <svg class="mockup-svg" viewBox="0 0 560 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- laptop -->
+          <rect x="40" y="60" width="380" height="240" rx="14" fill="#0E2A4D"/>
+          <rect x="54" y="74" width="352" height="212" rx="6" fill="#F4F7FB"/>
+          <path d="M10 300h450l-26 34a16 16 0 0 1-13 7H49a16 16 0 0 1-13-7L10 300z" fill="#123566"/>
+          <!-- dashboard header -->
+          <rect x="70" y="90" width="90" height="10" rx="5" fill="#0A1F3D"/>
+          <circle cx="380" cy="95" r="6" fill="#2FB2E8"/>
+          <!-- stat cards -->
+          <rect x="70" y="114" width="96" height="60" rx="8" fill="#fff" stroke="#E2E8F1"/>
+          <rect x="80" y="124" width="40" height="7" rx="3.5" fill="#71809A"/>
+          <rect x="80" y="140" width="60" height="12" rx="4" fill="#1C5FD1"/>
+          <rect x="178" y="114" width="96" height="60" rx="8" fill="#fff" stroke="#E2E8F1"/>
+          <rect x="188" y="124" width="40" height="7" rx="3.5" fill="#71809A"/>
+          <rect x="188" y="140" width="46" height="12" rx="4" fill="#2FB2E8"/>
+          <rect x="286" y="114" width="90" height="60" rx="8" fill="#fff" stroke="#E2E8F1"/>
+          <rect x="296" y="124" width="40" height="7" rx="3.5" fill="#71809A"/>
+          <rect x="296" y="140" width="52" height="12" rx="4" fill="#0A1F3D"/>
+          <!-- chart -->
+          <rect x="70" y="186" width="306" height="86" rx="8" fill="#fff" stroke="#E2E8F1"/>
+          <polyline points="86,244 120,220 154,232 188,200 222,214 256,190 290,206 324,182 358,196" fill="none" stroke="#1C5FD1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="86,244 120,220 154,232 188,200 222,214 256,190 290,206 324,182 358,196" fill="none" stroke="#2FB2E8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"/>
+
+          <!-- phone -->
+          <rect x="330" y="180" width="150" height="240" rx="22" fill="#0E2A4D"/>
+          <rect x="340" y="200" width="130" height="200" rx="4" fill="#F4F7FB"/>
+          <rect x="352" y="214" width="60" height="9" rx="4.5" fill="#0A1F3D"/>
+          <rect x="352" y="236" width="106" height="46" rx="8" fill="#1C5FD1"/>
+          <rect x="362" y="248" width="50" height="7" rx="3.5" fill="rgba(255,255,255,0.85)"/>
+          <rect x="362" y="260" width="34" height="6" rx="3" fill="rgba(255,255,255,0.6)"/>
+          <rect x="352" y="292" width="106" height="30" rx="7" fill="#fff" stroke="#E2E8F1"/>
+          <rect x="352" y="330" width="106" height="30" rx="7" fill="#fff" stroke="#E2E8F1"/>
+          <rect x="352" y="368" width="106" height="30" rx="7" fill="#fff" stroke="#E2E8F1"/>
+          <circle cx="440" cy="383" r="10" fill="#2FB2E8"/>
+
+          <!-- connector node line (signature motif) -->
+          <path class="flow-dash" d="M120 340 C 170 380, 230 300, 300 320" stroke="#2FB2E8" stroke-width="2.5" fill="none"/>
+          <circle class="node-pulse" cx="120" cy="340" r="6" fill="#1C5FD1"/>
+          <circle class="node-pulse delay" cx="300" cy="320" r="6" fill="#2FB2E8"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-copy reveal">
+        <p class="eyebrow">Siapa Kami</p>
+        <h2 style="margin-bottom:20px">Mitra transformasi digital yang menjembatani teknologi dan kebutuhan nyata bisnis Anda.</h2>
+        <p>PT Asa Cipta Konektivita adalah mitra transformasi digital terpercaya yang bergerak di bidang pengembangan perangkat lunak dan solusi IT inovatif. Kami lahir dari semangat untuk menjembatani kesenjangan antara kompleksitas teknologi dan kebutuhan nyata dunia bisnis.</p>
+        <p>Kami tidak hanya membangun kode; kami merancang solusi digital yang membantu perusahaan menyederhanakan operasional, meningkatkan efisiensi, dan membuka peluang pertumbuhan baru. Melalui pendekatan yang kolaboratif dan adaptif, kami memastikan setiap teknologi yang kami ciptakan memberikan dampak nyata bagi bisnis Anda.</p>
+      </div>
+      <div class="about-rail reveal">
+        <div class="rail-card"><b>6</b><span>Kategori solusi — dari mobile app hingga cloud infrastructure</span></div>
+        <div class="rail-card"><b>Agile</b><span>Proses pengembangan bertahap &amp; transparan</span></div>
+        <div class="rail-card"><b>End-to-end</b><span>Dari discovery, desain, hingga dukungan pasca-peluncuran</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="vision">
+    <div class="container">
+      <div class="vision-inner reveal">
+        <p class="eyebrow eyebrow--light">Visi Besar</p>
+        <h2>Demokratisasi teknologi enterprise untuk semua skala bisnis.</h2>
+        <p>Kami percaya bahwa inovasi teknologi canggih tingkat enterprise seharusnya tidak hanya menjadi milik perusahaan raksasa dengan anggaran tak terbatas. PT Asa Cipta Konektivita hadir untuk meruntuhkan batasan tersebut. Visi kami adalah membawa teknologi digital terbaik, teraman, dan paling efisien agar dapat diadopsi dengan mudah oleh semua skala bisnis yang ingin berkembang di era digital.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMS + APPROACH -->
+  <section class="problems">
+    <div class="container">
+      <div class="section-head section-head--center reveal" style="margin-left:auto;margin-right:auto">
+        <p class="eyebrow" style="justify-content:center">Tantangan yang Kami Pecahkan</p>
+        <h2>Masalah yang sering Anda hadapi dengan software bisnis</h2>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-coin"/></svg></div>
+          <h3>Investasi Terlalu Mahal</h3>
+          <p>Biaya development awal dan lisensi yang mencekik.</p>
+        </div>
+        <div class="problem-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-maze"/></svg></div>
+          <h3>Kompleks &amp; Rumit</h3>
+          <p>Sistem yang terlalu membingungkan untuk digunakan oleh tim operasional Anda.</p>
+        </div>
+        <div class="problem-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-hourglass"/></svg></div>
+          <h3>Sulit Diimplementasikan</h3>
+          <p>Proses integrasi yang memakan waktu berbulan-bulan bahkan tahunan.</p>
+        </div>
+        <div class="problem-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-broken-link"/></svg></div>
+          <h3>Kaku &amp; Tidak Fleksibel</h3>
+          <p>Perangkat lunak yang ada di pasar tidak bisa menyesuaikan alur kerja unik bisnis Anda.</p>
+        </div>
+      </div>
+
+      <div class="approach-bridge reveal">
+        <svg><use href="#ic-arrow-right" style="transform:rotate(90deg)"/></svg>
+        <span>Pendekatan Kami</span>
+      </div>
+
+      <div class="approach-card reveal">
+        <div class="icon-wrap"><svg><use href="#ic-bolt"/></svg></div>
+        <h3>Kami membalikkan keadaan tersebut.</h3>
+        <p>Dengan merancang software yang <em>scalable</em> (dapat berkembang mengikuti bisnis), memiliki antarmuka yang intuitif (mudah digunakan), serta dengan model biaya yang transparan dan efisien.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="solutions" id="solutions">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Solusi Kami</p>
+        <h2>Enam kategori solusi untuk menjawab kebutuhan digital bisnis Anda</h2>
+      </div>
+      <div class="card-grid cols-3">
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-mobile"/></svg></div>
+          <h3>Mobile Apps</h3>
+          <p>Aplikasi Android &amp; iOS kustom untuk menjangkau pelanggan Anda secara langsung.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-layers"/></svg></div>
+          <h3>SaaS (Software as a Service)</h3>
+          <p>Aplikasi berbasis langganan yang siap pakai untuk mempercepat operasional.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-dashboard"/></svg></div>
+          <h3>Interactive Dashboard</h3>
+          <p>Visualisasi data dan analitik bisnis untuk pengambilan keputusan yang cepat dan tepat.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-automation"/></svg></div>
+          <h3>Business Automation</h3>
+          <p>Otomatisasi alur kerja berulang demi menghemat waktu dan meminimalisir human error.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-code"/></svg></div>
+          <h3>Custom Software Development</h3>
+          <p>Sistem yang dirancang khusus dari nol sesuai dengan SOP unik perusahaan Anda.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-cloud"/></svg></div>
+          <h3>Cloud Platform &amp; Infrastructure</h3>
+          <p>Migrasi dan manajemen data berbasis cloud yang aman dan dapat diakses dari mana saja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Produk Kami</p>
+        <h2>Produk siap pakai yang bisa langsung diadopsi bisnis Anda</h2>
+        <p>Contoh lini produk yang kami kembangkan dan siap disesuaikan dengan kebutuhan Anda.</p>
+      </div>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <span class="product-tag">Antrean Digital</span>
+          <h3>QuickQueue</h3>
+          <p>Sistem manajemen antrean digital pintar untuk mengoptimalkan waktu tunggu pelanggan.</p>
+        </div>
+        <div class="product-card reveal">
+          <span class="product-tag">Point of Sales</span>
+          <h3>Mikro POS</h3>
+          <p>Sistem kasir modern dengan manajemen inventaris real-time dan laporan keuangan otomatis.</p>
+        </div>
+        <div class="product-card reveal">
+          <span class="product-tag">Manajemen Properti</span>
+          <h3>PropertyManager</h3>
+          <p>Solusi pengelolaan properti, penyewa, dan tagihan dalam satu dasbor terintegrasi.</p>
+        </div>
+        <div class="product-card reveal">
+          <span class="product-tag">Pelacak Pengeluaran</span>
+          <h3>ExpenseTagger</h3>
+          <p>Aplikasi pelacak dan manajemen pengeluaran operasional tim secara instan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Cara Kami Bekerja</p>
+        <h2>Enam langkah yang terhubung, dari ide hingga sistem berjalan</h2>
+      </div>
+      <div class="process-path">
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <div class="node">01</div>
+            <div><h3>Discovery &amp; Consulting</h3><p>Kami duduk bersama Anda untuk memahami tantangan, tujuan bisnis, dan kebutuhan sistem Anda.</p></div>
+          </div>
+          <div class="process-step reveal">
+            <div class="node">02</div>
+            <div><h3>Architecture &amp; Design</h3><p>Merancang cetak biru arsitektur sistem dan desain antarmuka (UI/UX) yang ramah pengguna.</p></div>
+          </div>
+          <div class="process-step reveal">
+            <div class="node">03</div>
+            <div><h3>Agile Development</h3><p>Memulai proses coding secara bertahap dan transparan, sehingga Anda bisa melihat perkembangannya.</p></div>
+          </div>
+          <div class="process-step reveal">
+            <div class="node">04</div>
+            <div><h3>Rigorous Testing</h3><p>Pengujian menyeluruh (QA) untuk memastikan sistem bebas bug dan aman digunakan.</p></div>
+          </div>
+          <div class="process-step reveal">
+            <div class="node">05</div>
+            <div><h3>Deployment &amp; Launch</h3><p>Meluncurkan produk ke lingkungan produksi — Play Store, App Store, atau Server Web.</p></div>
+          </div>
+          <div class="process-step reveal">
+            <div class="node">06</div>
+            <div><h3>Continuous Support</h3><p>Dukungan teknis pasca-peluncuran, pemeliharaan berkala, dan pembaruan sistem sesuai kebutuhan.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="stack">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Teknologi</p>
+        <h2>Tech stack modern untuk kestabilan tinggi</h2>
+      </div>
+      <div class="stack-groups">
+        <div class="stack-group reveal">
+          <h4>Frontend / Mobile</h4>
+          <div class="chip-row">
+            <span class="chip">Flutter</span><span class="chip">React Native</span><span class="chip">Android (Kotlin)</span><span class="chip">iOS (Swift)</span><span class="chip">Next.js</span>
+          </div>
+        </div>
+        <div class="stack-group reveal">
+          <h4>Backend &amp; Cloud</h4>
+          <div class="chip-row">
+            <span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">Firebase</span><span class="chip">AWS</span><span class="chip">Google Cloud Platform</span>
+          </div>
+        </div>
+        <div class="stack-group reveal">
+          <h4>Database</h4>
+          <div class="chip-row">
+            <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Keunggulan</p>
+        <h2>Enam pilar yang menjadi fondasi setiap sistem yang kami bangun</h2>
+      </div>
+      <div class="card-grid cols-3">
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-spark"/></svg></div>
+          <h3>Modern Technology</h3>
+          <p>Kami selalu menggunakan tech stack terbaru untuk performa optimal dan masa pakai jangka panjang.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-devices"/></svg></div>
+          <h3>Cross-Platform Efficiency</h3>
+          <p>Aplikasi yang berjalan mulus di Android, iOS, dan Web dari satu basis kode yang efisien.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-shield"/></svg></div>
+          <h3>Cloud-Native &amp; Secure</h3>
+          <p>Perlindungan data berlapis dan arsitektur cloud yang menjamin keamanan informasi bisnis Anda.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-expand"/></svg></div>
+          <h3>High Scalability</h3>
+          <p>Sistem dirancang untuk siap menangani lonjakan data seiring berkembangnya skala bisnis Anda.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-tag"/></svg></div>
+          <h3>Affordable Enterprise Quality</h3>
+          <p>Kualitas teknologi kelas atas dengan penyesuaian biaya yang masuk akal bagi bisnis Anda.</p>
+        </div>
+        <div class="solution-card reveal">
+          <div class="icon-wrap"><svg><use href="#ic-heart"/></svg></div>
+          <h3>User-Centric Design</h3>
+          <p>Fokus pada kemudahan penggunaan, memastikan tim Anda langsung bisa mengoperasikannya.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROP -->
+  <section class="value">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Mengapa Memilih Kami</p>
+        <h2>Kami bukan sekadar vendor — kami mitra pertumbuhan Anda</h2>
+      </div>
+      <div class="value-list">
+        <div class="value-item reveal">
+          <span class="vnum">01</span>
+          <h3>Fokus pada Kebutuhan Bisnis</h3>
+          <p>Kami tidak sekadar membuat software bagus; kami membangun solusi yang menyelesaikan masalah utama bisnis Anda secara spesifik.</p>
+        </div>
+        <div class="value-item reveal">
+          <span class="vnum">02</span>
+          <h3>Efisiensi Biaya Total (TCO)</h3>
+          <p>Tanpa biaya tersembunyi. Kami memaksimalkan budget Anda untuk menghasilkan ROI (Return on Investment) tertinggi.</p>
+        </div>
+        <div class="value-item reveal">
+          <span class="vnum">03</span>
+          <h3>Pengembangan yang Cepat &amp; Tangkas</h3>
+          <p>Menggunakan metodologi Agile agar produk Anda bisa masuk ke pasar (Time-to-Market) dengan lebih cepat.</p>
+        </div>
+        <div class="value-item reveal">
+          <span class="vnum">04</span>
+          <h3>Dukungan Berkelanjutan</h3>
+          <p>Kami adalah mitra jangka panjang Anda. Tim kami siap mendampingi untuk pemeliharaan, update, dan konsultasi teknologi di masa depan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow" style="justify-content:center">FAQ</p>
+        <h2>Pertanyaan yang sering diajukan</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal" open>
+          <summary>Berapa lama waktu yang dibutuhkan untuk mengembangkan sebuah software?<span class="plus"></span></summary>
+          <div class="faq-a">Waktu pengembangan sangat bervariasi tergantung pada kompleksitas fitur. Untuk MVP atau produk tahap awal biasanya memakan waktu 1–2 bulan, sementara sistem kustom enterprise berskala besar bisa memakan waktu 3–6 bulan. Kami akan memberikan timeline detail setelah sesi konsultasi awal.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Apakah aplikasi yang dibuat langsung mendukung Android dan iOS sekaligus?<span class="plus"></span></summary>
+          <div class="faq-a">Ya. Dengan teknologi cross-platform (seperti Flutter), kami dapat mengembangkan satu aplikasi yang berjalan optimal di perangkat Android maupun iOS secara bersamaan, sehingga menghemat waktu dan biaya pengembangan Anda.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Apakah PT Asa Cipta Konektivita menerima proyek kustom yang sangat spesifik?<span class="plus"></span></summary>
+          <div class="faq-a">Tentu. Spesialisasi kami adalah menerjemahkan alur kerja bisnis atau SOP yang unik dan spesifik ke dalam sistem digital yang terotomatisasi dengan baik.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Setelah software selesai dibuat, apakah ada layanan maintenance?<span class="plus"></span></summary>
+          <div class="faq-a">Ya, setiap proyek dilengkapi dengan garansi pasca-peluncuran. Selain itu, kami menyediakan paket maintenance berkala untuk pemantauan server, pembaruan keamanan, dan dukungan teknis jika terjadi kendala.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container cta-inner">
+      <p class="eyebrow eyebrow--light" style="justify-content:center">Mari Diskusi</p>
+      <h2>Punya ide inovatif atau kebutuhan sistem spesifik? Mari diskusi bersama kami.</h2>
+      <p>Jangan biarkan kendala teknologi menghambat pertumbuhan bisnis Anda. Konsultasikan kebutuhan IT Anda dengan tim ahli kami secara gratis.</p>
+      <div class="cta-actions">
+        <a class="btn btn-on-dark" href="https://wa.me/6287810101060?text=Halo%20PT%20Asa%20Cipta%20Konektivita%2C%20saya%20ingin%20konsultasi%20gratis%20terkait%20kebutuhan%20software%20untuk%20bisnis%20saya." target="_blank" rel="noopener"><svg><use href="#ic-whatsapp"/></svg>Hubungi Kami via WhatsApp</a>
+        <a class="btn btn-ghost-on-dark" href="https://calendar.app.google/eT4N8xKJkbgGPsGX6" target="_blank" rel="noopener"><svg><use href="#ic-calendar"/></svg>Jadwalkan Konsultasi Gratis</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><img src="logo.png" alt="Logo PT Asa Cipta Konektivita"><span>PT Asa Cipta Konektivita</span></div>
+        <p>Connecting Business with Future Technology.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solusi</h4>
+        <ul>
+          <li><a href="#solutions">Custom Software</a></li>
+          <li><a href="#solutions">Mobile Apps</a></li>
+          <li><a href="#solutions">SaaS &amp; Dashboard</a></li>
+          <li><a href="#solutions">Business Automation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <ul>
+          <li><svg><use href="#ic-mail"/></svg><a href="mailto:info@asaciptakonektivita.com">info@asaciptakonektivita.com</a></li>
+          <li><svg><use href="#ic-whatsapp"/></svg><a href="https://wa.me/6287810101060" target="_blank" rel="noopener">+62 878-1010-1060</a></li>
+          <li><svg><use href="#ic-pin"/></svg><span>Perum GTT Gang Mangga Dua No. 65 F, Dalung</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PT Asa Cipta Konektivita. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // mobile menu
+  const menu = document.getElementById('mobileMenu');
+  document.getElementById('menuOpen').addEventListener('click', () => menu.classList.add('open'));
+  document.getElementById('menuClose').addEventListener('click', () => menu.classList.remove('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // only one FAQ open at a time
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        document.querySelectorAll('.faq-item').forEach(other => { if (other !== item) other.open = false; });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

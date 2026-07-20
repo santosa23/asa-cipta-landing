@@ -231,6 +231,10 @@
   .product-tag{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--primary);background:rgba(28,95,209,0.08);padding:5px 10px;border-radius:999px;display:inline-block;margin-bottom:16px}
   .product-card h3{margin-bottom:8px;position:relative;z-index:1}
   .product-card p{font-size:0.92rem;color:var(--slate-2);position:relative;z-index:1}
+  .status-badge{font-family:var(--font-mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--slate-2);background:var(--surface);border:1px solid var(--line);padding:4px 9px;border-radius:999px;display:inline-block;margin-left:8px;vertical-align:middle}
+  .card-link{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px;font-size:0.86rem;font-weight:600;color:var(--primary);margin-top:14px}
+  .card-link svg{width:15px;height:15px;transition:transform .18s ease}
+  .card-link:hover svg{transform:translateX(3px)}
   @media (min-width:640px){ .product-grid{grid-template-columns:1fr 1fr} }
   @media (min-width:1020px){ .product-grid{grid-template-columns:repeat(4,1fr)} }
 
@@ -576,9 +580,10 @@
           <p>Sistem manajemen antrean digital pintar untuk mengoptimalkan waktu tunggu pelanggan.</p>
         </div>
         <div class="product-card reveal">
-          <span class="product-tag">Point of Sales</span>
+          <span class="product-tag">Point of Sales</span><span class="status-badge">Coming Soon</span>
           <h3>Mikro POS</h3>
           <p>Sistem kasir modern dengan manajemen inventaris real-time dan laporan keuangan otomatis.</p>
+          <a class="card-link" href="https://simple-pos-690d7.web.app" target="_blank" rel="noopener">Lihat halaman produk<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
         <div class="product-card reveal">
           <span class="product-tag">Manajemen Properti</span>

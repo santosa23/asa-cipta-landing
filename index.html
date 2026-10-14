@@ -240,6 +240,9 @@
 
   .projects{padding:0 0 96px}
   @media (min-width:1020px){ .project-grid{grid-template-columns:repeat(2,1fr)} }
+  .project-shot{display:block;position:relative;z-index:1;margin-bottom:20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 18px 36px -24px rgba(10,31,61,0.35)}
+  .project-shot img{display:block;width:100%;height:auto;transition:transform .3s ease}
+  .project-shot:hover img{transform:scale(1.02)}
 
   /* ---------- PROCESS ---------- */
   .process{padding:96px 0;background:var(--surface)}
@@ -370,7 +373,6 @@
       <a href="#about">Tentang</a>
       <a href="#solutions">Solusi</a>
       <a href="#products">Produk</a>
-  <a href="#projects">Proyek</a>
       <a href="#projects">Proyek</a>
       <a href="#process">Proses</a>
       <a href="#faq">FAQ</a>
@@ -385,6 +387,7 @@
   <a href="#about">Tentang</a>
   <a href="#solutions">Solusi</a>
   <a href="#products">Produk</a>
+  <a href="#projects">Proyek</a>
   <a href="#process">Proses</a>
   <a href="#faq">FAQ</a>
   <a class="btn btn-primary" href="https://wa.me/6287810101060?text=Halo%20PT%20Asa%20Cipta%20Konektivita%2C%20saya%20ingin%20konsultasi%20gratis%20terkait%20kebutuhan%20software%20untuk%20bisnis%20saya." target="_blank" rel="noopener"><svg><use href="#ic-whatsapp"/></svg>Konsultasi Gratis</a>
@@ -609,11 +612,12 @@
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Proyek Kami</p>
-        <h2>Sistem yang sudah berjalan untuk klien kami</h2>
-        <p>Beberapa proyek nyata yang kami bangun dan kelola, dari website hingga sistem operasional.</p>
+        <h2>Sistem yang kami bangun untuk klien</h2>
+        <p>Berbeda dengan produk kami sendiri di atas, ini adalah website dan sistem yang kami kerjakan untuk bisnis klien dan sudah berjalan.</p>
       </div>
       <div class="product-grid project-grid">
         <div class="product-card reveal">
+          <a class="project-shot" href="https://myvillaubud.com" target="_blank" rel="noopener"><img src="img/project-myvillaubud.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Tampilan beranda website My Villa Ubud"></a>
           <span class="product-tag">Hospitality · Bali</span><span class="status-badge">Live</span>
           <h3>My Villa Ubud</h3>
           <p>Website promosi dan sistem booking untuk 7 villa private pool di Ubud: booking langsung harian, mingguan dan bulanan, voucher dan kampanye promo, portal travel agent dan agen properti, sinkron kalender iCal dengan OTA, serta dasbor admin.</p>
